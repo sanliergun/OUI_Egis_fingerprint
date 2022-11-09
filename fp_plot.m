@@ -23,11 +23,11 @@ plotin.y1 = plotY1;
 plotin.z1 = plotVar2b_filtered_equalized;
 plotin.xlabel1 = 'X (mm)';
 plotin.ylabel1 = 'Y (mm)';
-plotin.title1 = ['Focused Image'];
+plotin.title1 = 'Focused Image';
 plotin.fontsize1 = 20;
 plotin.axis1 = [-5 5 -5 5];
 plotin.clim1 = [0 1];
-plotin.autocolor1 = 1;
+plotin.autocolor1 = 0;
 plotin.filename = [output_folder '/fp_focused_' plotin.datestr];
 
     N_bins = 1000;

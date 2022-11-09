@@ -1,7 +1,10 @@
-function[] = reconstruct_fingerprint()
+function[] = reconstruct_fingerprint(rootpath)
 
 % load reference and fingerprint scans.
-[rf_data_bl, rf_data_fp, fp_indices, error_flag] = load_HDF5_file();
+if ~exist(rootpath, 'dir')
+    mkdir(rootpath);
+end
+[rf_data_bl, rf_data_fp, fp_indices, error_flag] = load_HDF5_file(rootpath);
 
 % stop if there is an error.
 if error_flag
@@ -103,8 +106,8 @@ if ~isempty(answers)
     BF.histogram_zero_reference    = str2double(answers{6})/100; % shift the histogram so that the lower 2.5% in value is below 0
 end
 BF.histogram_one_reference     = BF.histogram_zero_reference; % shift the histogram so that the higher 2.5% in value is above 1
-output_folder               = 'output_images/';
-if ~exist(output_folder)
+output_folder               = [rootpath 'output_images/'];
+if ~exist(output_folder, 'dir')
     mkdir(output_folder);
 end
 

@@ -1,13 +1,12 @@
-function[rf_data_bl, rf_data_fp, txrx_indices, error_flag] = load_HDF5_file()
+function[rf_data_bl, rf_data_fp, txrx_indices, error_flag] = load_HDF5_file(rootpath)
 
     error_flag = 0;
     rf_data_bl = [];
     rf_data_fp = [];
     txrx_indices =[2, 247, 2, 247];
     
-    rootpath = './datafiles/';
-    if exist('last_used_directory.mat','file')
-        load('last_used_directory.mat', 'last_used_path');
+    if exist([rootpath 'last_used_directory.mat'],'file')
+        load([rootpath 'last_used_directory.mat'], 'last_used_path');
         i0 = strfind(last_used_path, '/');
         if isempty(i0)
             i0 = strfind(last_used_path, '\');
@@ -28,5 +27,5 @@ function[rf_data_bl, rf_data_fp, txrx_indices, error_flag] = load_HDF5_file()
         fp_filename = fp_filename(1);
         rf_data_bl = h5read([bl_filename.folder '/' bl_filename.name], '/scan');
         rf_data_fp = h5read([fp_filename.folder '/' fp_filename.name], '/scan');
-        save('last_used_directory.mat', 'last_used_path');
+        save([rootpath 'last_used_directory.mat'], 'last_used_path');
     end
